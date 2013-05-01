@@ -1,5 +1,10 @@
-<% provide(:title, 'Home') %>
-<h1>My Web</h1>
-<p>this is my new web;</p>
-<p>my <a href="http://github.com/yeyong14/myweb.git">Github</a></p>
-<a href="about">About Us</a>
+#encoding:utf-8
+<% provide(:title) %>
+<div class="center hero-unit">
+<h1>Twitter?</h1>
+<p>在特色社会主义背景下，上不去推特吗？</p>
+<p>这里就可以，这个是另一个推特，新建立的.</p>
+<p>还没有纳入GFW的视线，在这里可以随性而做！</p>
+<%= link_to "现在注册", signup_path, class: "btn btn-large btn-primary" %>
+</div>
+<%= link_to image_tag("rails.png", alt: "Rails"),'http://rubyonrails.org/' %>
