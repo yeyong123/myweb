@@ -30,15 +30,15 @@ describe "User Pages" do
 
     describe "with valid information" do
       before do
-        fill_in "用户名",         with: "yeyong"
-        fill_in "邮箱",        with: "yeyong14@gmail.com"
+        fill_in "用户名",         with: "Example User"
+        fill_in "邮箱",        with: "user@example.com"
         fill_in "密码",     with: 123456
         fill_in "重复密码", with: 123456
-      end
-
-      it "should create a user" do
-        expect { click_button submit }.to change(User, :count).by(1)
+      end  
+        it "should create a user" do
+            expect { click_button submit }.to change(User, :count).by(1)
       end
     end
   end
 end
+
