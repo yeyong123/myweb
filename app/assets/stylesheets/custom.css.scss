@@ -82,13 +82,71 @@ footer ul li {
   margin-left: 10px;
 }
 
+/*调试信息栏的CSS代码*/
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
 
+/* 头像CSS代码*/
+aside {
+  section {
+    padding: 10px 0;
+    border-top: 1px solid #eaeaea;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.6em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+    }
+  }
+}
 
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
 
+/* 注册表单的CSS代码*/
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  height: auto !important;
+  margin-bottom: 15px;
+  @include box-sizing;
+}
 
-
-
+/*错误信息CSS代码*/
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+  .field_with_errors {
+    @extend .control-group;
+    @extend .error;
+  }
 
 
 

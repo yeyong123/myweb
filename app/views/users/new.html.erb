@@ -1,3 +1,24 @@
+#encoding:utf-8
 <% provide(:title, 'Sign up') %>
 <h1>注册</h1>
-<p>注册登录！</p>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name, "用户名" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email, "邮箱" %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password, "密码" %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation,"重复密码" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "提交", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

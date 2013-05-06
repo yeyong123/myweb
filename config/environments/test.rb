@@ -34,4 +34,8 @@ Myweb::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  require 'bcrypt' do
+    BCrypt::Engline::DEFAULF_COST = BCrypt::Engline::MIN_COST
+  end
 end
