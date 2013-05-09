@@ -162,3 +162,22 @@ li {
 }
 }
 
+/* 分页显示的CSS代码 */
+.digg_pagination ul li {
+   margin-left: 0; 
+   padding-left: 0; 
+   display: inline;
+   font-size: 16px;
+	 border: 1px solid #DDD;  
+   padding: 1px;
+   
+   margin-right: 1px;
+   clear:botn;
+ }
+.digg_pagination a:hover, .digg_pagination a:focus {
+
+color: #003;
+
+border-color: #003; } 
+
+
