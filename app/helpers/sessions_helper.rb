@@ -1,3 +1,4 @@
+#encoding:utf-8
 module SessionsHelper
 
   def sign_in(user)
@@ -19,6 +20,13 @@ module SessionsHelper
 
   def signed_in?
     !current_user.nil?
+  end
+  
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "请先登录"
+    end
   end
 
   def sign_out

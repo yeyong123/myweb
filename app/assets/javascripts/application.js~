@@ -15,5 +15,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap
-//= require rails-timeago-all
+//= require rails-timeago
 

@@ -77,6 +77,17 @@ describe "authentication" do
           before { visit users_path }
           it { should have_selector('title', text: "登录")}
         end
+
+        describe "点击按钮提交创建微博" do
+          before { post microposts_path }
+          specify {response.should redirect_to(signin_path)}
+        end
+
+        describe "点击按钮删除微博动作" do
+          before { delete micropost_path(FactoryGirl.create(:micropost))}
+          specify { response.should redirect_to(signin_path)}
+        end
+          
       end
     end
 

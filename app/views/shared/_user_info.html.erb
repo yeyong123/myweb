@@ -1,0 +1,13 @@
+#encoding:utf-8
+<a href="<%= user_path(current_user) %>">
+  <%= gravatar_for current_user %>
+</a>
+<h1>
+  <%= current_user.name %>
+</h1>
+<span>
+  <%= link_to "个人信息", current_user %>
+</span>
+<span>
+ 微博 <%= link_to pluralize(current_user.microposts.count,''), '#' %>
+</span>
