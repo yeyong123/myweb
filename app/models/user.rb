@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
   has_many :microposts, dependent: :destroy #保证所有依赖用户的微博都删除。
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy #删除用户所有依赖的关系都删除
 
  before_save {|user| user.email = email.downcase}
   validates :name, presence: true, length: {maximum: 50}
