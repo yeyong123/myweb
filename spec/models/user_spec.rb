@@ -25,6 +25,12 @@ describe User do
   it { should respond_to(:authenticate)}
   it { should respond_to(:feed)}
   it { should respond_to(:relationships)}
+  it { should respond_to(:followed_users)}
+  it { should respond_to(:reverse_relationships)}
+  it { should respond_to(:followers)}
+  it { should respond_to(:following?)}
+  it { should respond_to(:follow!)}
+  it { should respond_to(:unfollow!)}
   it { should respond_to(:microposts)}
   it { should respond_to(:remember_token)}
   it { should be_valid }
@@ -155,6 +161,28 @@ describe User do
       microposts.each do |micropost|
         Micropost.find_by_id(micropost.id).should be_nil
       end
+    end
+  end
+
+  describe "正在关注" do
+    let(:other_user) { FactoryGirl.create(:user)}
+    before do
+      @user.save
+      @user.follow!(other_user) #关注关联关系。
+    end
+    
+    it { should be_following(other_user)} #应该有正在关注的其他用户
+    its(:followed_users) { should include(other_user)} #被关注的用户有包含关注的用户
+    
+    describe "被关注者用户" do
+      subject { other_user } #转到了另一个测试，subject“主题
+      its(:followers) { should include(@user) } #这个被关注者的粉丝当中应该有包含关注者的用户
+    end
+    
+    describe "取消关注" do
+      before { @user.unfollow!(other_user)}
+      it { should_not be_following(other_user)}
+      its(:followed_users) { should_not include(other_user)}
     end
   end
 end

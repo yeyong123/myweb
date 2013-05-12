@@ -9,5 +9,5 @@
   <%= link_to "个人信息", current_user %>
 </span>
 <span>
- 微博 <%= link_to pluralize(current_user.microposts.count,''), '#' %>
+ 微博 <%= pluralize(current_user.microposts.count,'') %>
 </span>

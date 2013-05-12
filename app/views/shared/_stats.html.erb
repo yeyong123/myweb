@@ -1,0 +1,16 @@
+#encoding:utf-8
+<% @user ||= current_user %>
+<div class="stats">
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following" class="stat">
+      <%= @user.followed_users.count %>
+    </strong>
+    正在关注
+  </a>
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+      <%= @user.followers.count %>
+    </strong>
+    关注者
+  </a>
+</div>

@@ -43,6 +43,17 @@ describe "Static pages" do
       user.feed.each do |item|
         page.should have_selector("li##{item.id}", text: item.content )
       end
+   
+    describe "关注者/正在关注的总和" do
+      let(:other_user) { FactoryGirl.create(:user)}
+      before do
+        other_user.follow!(user)
+        visit root_path
+      end
+
+        #it { should have_link("0 正在关注", href: following_user_path(user))}
+       # it { should have_link("1 关注者",  href: followers_user_path(user))}
+      end
     end
   end
 end

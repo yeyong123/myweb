@@ -1,6 +1,7 @@
 #encsding:utf-8
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update] 
+  before_filter :signed_in_user, only: [:index, :edit, :update,
+                                        :destroy, :following, :followers] 
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: :destroy
   def show
@@ -47,12 +48,24 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+
+  def following
+    @title = "正在关注"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "关注者"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+
   private
 
-#  def signed_in_user
- #   store_location
-#    redirect_to signin_path, notice: "请先登录。" unless signed_in?
- # end
 
   def correct_user
     @user = User.find(params[:id])

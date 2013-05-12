@@ -44,6 +44,17 @@ describe "authentication" do
     describe "non-signed_in users" do
       let(:user) { FactoryGirl.create(:user)}
 
+      describe "在这关系控制器中" do
+        describe "点击按钮进行创建行为" do
+          before { post relationships_path }
+          specify { response.should redirect_to(signin_path)}
+        end
+
+        describe "点击按钮进行删除行为" do
+          before { delete relationship_path(1)}
+          specify { response.should redirect_to(signin_path)}
+        end
+      end
       describe "when attempting to visit a protected page" do
         before do 
           visit edit_user_path(user)
@@ -87,7 +98,17 @@ describe "authentication" do
           before { delete micropost_path(FactoryGirl.create(:micropost))}
           specify { response.should redirect_to(signin_path)}
         end
-          
+        
+
+        describe "访问正在关注者的页面" do
+          before { visit following_user_path(user)}
+          it { should have_selector('title', text: "登录")}
+        end
+
+        describe "访问粉丝的页面" do
+          before { visit followers_user_path(user) }
+          it { should have_selector('title', text: "登录") }
+        end
       end
     end
 

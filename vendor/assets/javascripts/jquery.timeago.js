@@ -32,8 +32,8 @@
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
-        suffixAgo: "ago",
-        suffixFromNow: "now",
+        suffixAgo: "前",
+        suffixFromNow: "刚刚",
         seconds: "小于一分钟",
         minute: "大约 一分钟",
         minutes: "%d 分钟",

@@ -56,7 +56,56 @@ describe "User Pages" do
       it { should have_content(m2.content)}
       it { should have_content(user.microposts.count)}
     end
-  end
+
+    describe "关注/取消关注按钮" do
+      let(:other_user) { FactoryGirl.create(:user)}
+      before { sign_in user }
+
+      describe "点击关注一个用户" do
+        before { visit user_path(other_user)}
+
+        it "应该增加关注用户的数量" do
+          expect do
+            click_button "关注"
+          end.to change(user.followed_users, :count).by(1)
+        end
+
+        it "应该增加被关注用户的关注者的数量" do
+          expect do
+            click_button "关注" 
+          end.to change(other_user.followers, :count).by(1)
+        end
+
+        describe "切换开关按钮" do
+          before { click_button "关注" }
+          it { should have_selector('input', value: '取消关注') }
+        end
+
+        describe "取消关注一个用户" do
+          before do
+            user.follow!(other_user)
+            visit user_path(other_user)
+          end
+
+        it "应该减掉这个被关注用户的数量" do
+          expect do
+            click_button "取消关注"
+          end.to change(user.followed_users, :count).by(-1)
+        end
+
+        it "应该减掉这个被关注者那里的关注者用户的数量" do
+          expect do
+            click_button "取消关注" 
+          end.to change(other_user.followers, :count).by(-1)
+        end
+
+        describe "切换按钮的改变" do
+          before { click_button "取消关注" }
+          it { should have_selector('input', value: "关注") }
+        end
+      end
+    end
+  end 
 
   describe "signup page" do 
     before { visit signup_path }
@@ -126,5 +175,33 @@ describe "User Pages" do
       specify { user.reload.email.should == new_email }
     end
   end
-end
 
+  describe "我关注的/关注我的" do
+    let(:user) { FactoryGirl.create(:user)}
+    let(:other_user) { FactoryGirl.create(:user)}
+    before { user.follow!(other_user) }
+
+    describe "关注我的用户" do
+      before do
+        sign_in user
+      visit following_user_path(user)
+    end
+
+      it { should have_selector('title', text: full_title('正在关注'))}
+      it { should have_selector('h3', text: '正在关注')}
+      it { should have_link(other_user.name, href: user_path(other_user))}
+    end
+
+    describe "关注我的" do
+      before do
+        sign_in other_user
+      visit followers_user_path(other_user)
+    end
+
+      it { should have_selector('title', text: full_title('关注者'))}
+      it { should have_selector('h3', text: '关注者')}
+      it { should have_link(user.name, href: user_path(user))}
+      end
+    end
+  end
+end

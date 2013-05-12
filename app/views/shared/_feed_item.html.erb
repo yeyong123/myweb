@@ -8,7 +8,7 @@
   <%= feed_item.content %>
 </span>
 <span class="timestamp">
-  <%= time_ago_in_words(feed_item.created_at) %>
+  <%= time_ago_in_words(feed_item.created_at) %>前
 </span>
 <% if current_user?(feed_item.user) %>
   <%= link_to "删除", feed_item, method: :delete,
